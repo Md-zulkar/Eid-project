@@ -4,8 +4,936 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid-ul-Adha Mubarak Greetings</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Background Elements */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/dark-stars.png') repeat;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        
+        .twinkling {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            animation: twinkle 200s linear infinite;
+            z-index: 0;
+        }
+        
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/arabesque.png') repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .mosque-silhouette {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23ffffff"></path><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23ffffff"></path><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23ffffff"></path></svg>') no-repeat center bottom;
+            background-size: cover;
+            z-index: 0;
+            opacity: 0.7;
+        }
+        
+        /* Content Styles */
+        .content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .greeting {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #f8d56b;
+            text-shadow: 0 0 10px rgba(248, 213, 107, 0.5);
+            font-weight: 700;
+        }
+        
+        .arabic-text {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #f8d56b;
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+        }
+        
+        .message {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .message p {
+            margin-bottom: 15px;
+        }
+        
+        /* Crescent Moon and Stars */
+        .crescent-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+        }
+        
+        .crescent {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: transparent;
+            border-radius: 50%;
+            box-shadow: 30px 30px 0 0 #f8d56b;
+            transform: rotate(-45deg);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: twinkle-star 2s infinite alternate;
+        }
+        
+        .star1 { width: 15px; height: 15px; top: 10px; left: 20px; animation-delay: 0.2s; }
+        .star2 { width: 10px; height: 10px; top: 40px; right: 10px; animation-delay: 0.5s; }
+        .star3 { width: 12px; height: 12px; bottom: 20px; left: 30px; animation-delay: 0.8s; }
+        .star4 { width: 8px; height: 8px; top: 20px; right: 30px; animation-delay: 0.3s; }
+        .star5 { width: 9px; height: 9px; bottom: 40px; right: 20px; animation-delay: 0.6s; }
+        .star6 { width: 7px; height: 7px; top: 60px; left: 10px; animation-delay: 0.4s; }
+        .star7 { width: 11px; height: 11px; bottom: 10px; right: 40px; animation-delay: 0.7s; }
+        
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .wish-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .primary-button {
+            background-color: #f8d56b;
+            color: #2c3e50;
+        }
+        
+        .primary-button:hover {
+            background-color: #f5c33b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(248, 213, 107, 0.4);
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            color: #f8d56b;
+            border: 2px solid #f8d56b;
+        }
+        
+        .secondary-button:hover {
+            background-color: rgba(248, 213, 107, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(248, 213, 107, 0.2);
+        }
+        
+        /* Countdown Timer */
+        .countdown-container {
+            margin: 40px auto;
+            max-width: 600px;
+        }
+        
+        .countdown-container h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #f8d56b;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .time-section {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px 10px;
+            min-width: 80px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .time-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f8d56b;
+        }
+        
+        .time-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        /* Decorative Elements */
+        .floating-lanterns {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .lantern {
+            position: absolute;
+            background-color: #f8d56b;
+            border-radius: 50%;
+            filter: blur(5px);
+            opacity: 0.7;
+            animation: float 15s infinite linear;
+        }
+        
+        .lantern1 { width: 30px; height: 30px; top: 10%; left: 5%; animation-delay: 0s; }
+        .lantern2 { width: 20px; height: 20px; top: 25%; left: 15%; animation-delay: 2s; animation-duration: 12s; }
+        .lantern3 { width: 25px; height: 25px; top: 15%; right: 10%; animation-delay: 1s; animation-duration: 18s; }
+        .lantern4 { width: 15px; height: 15px; top: 30%; right: 20%; animation-delay: 3s; animation-duration: 14s; }
+        .lantern5 { width: 20px; height: 20px; bottom: 20%; left: 10%; animation-delay: 4s; animation-duration: 16s; }
+        .lantern6 { width: 25px; height: 25px; bottom: 30%; right: 15%; animation-delay: 2.5s; animation-duration: 13s; }
+        .lantern7 { width: 15px; height: 15px; top: 40%; left: 25%; animation-delay: 1.5s; animation-duration: 17s; }
+        .lantern8 { width: 30px; height: 30px; bottom: 15%; right: 5%; animation-delay: 3.5s; animation-duration: 15s; }
+        .lantern9 { width: 20px; height: 20px; top: 50%; left: 50%; animation-delay: 0.5s; animation-duration: 20s; }
+        
+        .decorative-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .fanoos {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: #f8d56b;
+            border-radius: 50% 50% 5px 5px;
+            opacity: 0.8;
+            box-shadow: 0 0 20px #f8d56b;
+        }
+        
+        .fanoos:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            width: 10px;
+            height: 10px;
+            background-color: #f8d56b;
+            border-radius: 50%;
+        }
+        
+        .fanoos:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 17px;
+            width: 6px;
+            height: 15px;
+            background-color: #f8d56b;
+        }
+        
+        .fanoos1 { top: 10%; left: 5%; animation: swing 5s infinite ease-in-out; }
+        .fanoos2 { top: 15%; right: 8%; animation: swing 6s infinite ease-in-out reverse; }
+        .fanoos3 { bottom: 20%; left: 10%; animation: swing 4s infinite ease-in-out; }
+        .fanoos4 { bottom: 25%; right: 12%; animation: swing 5.5s infinite ease-in-out reverse; }
+        .fanoos5 { top: 30%; left: 50%; transform: translateX(-50%); animation: swing 7s infinite ease-in-out; }
+        
+        /* Prayer Times */
+        .prayer-times {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        
+        .prayer-times-toggle {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(248, 213, 107, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .prayer-times-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .prayer-times-toggle i {
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .prayer-times-content {
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background-color: rgba(26, 42, 58, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .prayer-times:hover .prayer-times-content {
+            display: block;
+        }
+        
+        .prayer-times-content h3 {
+            margin-bottom: 15px;
+            color: #f8d56b;
+            text-align: center;
+        }
+        
+        .prayer-times-content ul {
+            list-style: none;
+        }
+        
+        .prayer-times-content li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .prayer-times-content li span {
+            font-weight: 600;
+            color: #f8d56b;
+        }
+        
+        /* Qibla Direction */
+        .qibla-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 10;
+        }
+        
+        .qibla-toggle {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(248, 213, 107, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .qibla-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .qibla-toggle i {
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .qibla-content {
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background-color: rgba(26, 42, 58, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .qibla-indicator:hover .qibla-content {
+            display: block;
+        }
+        
+        .qibla-content h3 {
+            margin-bottom: 15px;
+            color: #f8d56b;
+            text-align: center;
+        }
+        
+        .compass {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            position: relative;
+            border: 2px solid #f8d56b;
+        }
+        
+        .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 4px;
+            background-color: #f8d56b;
+            transform-origin: left center;
+            transform: translate(0, -50%) rotate(0deg);
+        }
+        
+        .compass-needle:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #f8d56b;
+            transform: translateX(10px);
+        }
+        
+        .qibla-content p {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Popup Styles */
+        .wish-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .wish-popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(248, 213, 107, 0.3);
+        }
+        
+        .calendar-content {
+            max-width: 800px;
+        }
+        
+        .popup-content h2 {
+            color: #f8d56b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .popup-divider {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            color: #f8d56b;
+        }
+        
+        .popup-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .arabic-wish {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 25px 0;
+            color: #f8d56b;
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+        }
+        
+        .translation {
+            text-align: center;
+            font-style: italic;
+            opacity: 0.8;
+            margin-top: -15px;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: #f8d56b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-button:hover {
+            transform: rotate(90deg);
+        }
+        
+        .islamic-pattern {
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" fill="none" stroke="%23f8d56b" stroke-width="1" opacity="0.3"/></svg>') repeat-x;
+        }
+        
+        .top-pattern {
+            top: 0;
+        }
+        
+        .bottom-pattern {
+            bottom: 0;
+            transform: rotate(180deg);
+        }
+        
+        /* Wish Selector */
+        .wish-selector {
+            margin: 30px 0;
+        }
+        
+        .wish-selector h3 {
+            margin-bottom: 15px;
+            color: #f8d56b;
+            text-align: center;
+        }
+        
+        .wish-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .wish-option {
+            padding: 8px 15px;
+            background-color: rgba(248, 213, 107, 0.2);
+            border: 1px solid #f8d56b;
+            border-radius: 20px;
+            color: #f8d56b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .wish-option:hover {
+            background-color: rgba(248, 213, 107, 0.4);
+        }
+        
+        .selected-wish-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #f8d56b;
+        }
+        
+        #selectedWish {
+            font-style: italic;
+            color: #f8d56b;
+        }
+        
+        /* Share Section */
+        .share-section {
+            margin-top: 30px;
+        }
+        
+        .share-section h3 {
+            margin-bottom: 15px;
+            color: #f8d56b;
+            text-align: center;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .share-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+        .email { background-color: #d44638; }
+        
+        /* Calendar Styles */
+        .calendar-container {
+            margin: 20px 0;
+        }
+        
+        .calendar-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-controls button {
+            background-color: transparent;
+            border: none;
+            color: #f8d56b;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-controls button:hover {
+            background-color: rgba(248, 213, 107, 0.2);
+        }
+        
+        #currentMonth {
+            color: #f8d56b;
+            font-size: 1.3rem;
+        }
+        
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #f8d56b;
+        }
+        
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .days div {
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .days div:hover {
+            background-color: rgba(248, 213, 107, 0.2);
+        }
+        
+        .days .prev-month,
+        .days .next-month {
+            opacity: 0.3;
+        }
+        
+        .days .today {
+            background-color: rgba(248, 213, 107, 0.5);
+            font-weight: bold;
+        }
+        
+        .days .event-day {
+            position: relative;
+        }
+        
+        .days .event-day:after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: #f8d56b;
+            border-radius: 50%;
+        }
+        
+        .islamic-events {
+            margin-top: 30px;
+        }
+        
+        .islamic-events h3 {
+            margin-bottom: 15px;
+            color: #f8d56b;
+            text-align: center;
+        }
+        
+        .islamic-events ul {
+            list-style: none;
+        }
+        
+        .islamic-events li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .event-date {
+            color: #f8d56b;
+            font-weight: 600;
+        }
+        
+        /* Sound Control */
+        .sound-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+        
+        .sound-button {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(248, 213, 107, 0.8);
+            border-radius: 50%;
+            border: none;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .sound-button:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-content p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .signature {
+            font-style: italic;
+            color: #f8d56b;
+            margin: 15px 0;
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            color: #f8d56b;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes twinkle {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.1; }
+        }
+        
+        @keyframes twinkle-star {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 30px 30px 0 0 #f8d56b; }
+            100% { box-shadow: 30px 30px 0 0 #f8d56b, 0 0 30px 10px rgba(248, 213, 107, 0.5); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .greeting {
+                font-size: 2.2rem;
+            }
+            
+            .arabic-text {
+                font-size: 1.8rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .time-section {
+                min-width: 70px;
+            }
+            
+            .time-value {
+                font-size: 2rem;
+            }
+            
+            .popup-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .qibla-indicator {
+                top: 140px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .greeting {
+                font-size: 1.8rem;
+            }
+            
+            .arabic-text {
+                font-size: 1.5rem;
+            }
+            
+            .time-section {
+                min-width: 60px;
+                padding: 10px 5px;
+            }
+            
+            .time-value {
+                font-size: 1.5rem;
+            }
+            
+            .time-label {
+                font-size: 0.8rem;
+            }
+            
+            .wish-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -29,12 +957,12 @@
             </div>
             
             <h1 class="greeting">Eid-ul-Adha Mubarak</h1>
-            <div class="arabic-text">عیدِ اضحی مبارک</div>
+            <div class="arabic-text">عيد الأضحى مبارك</div>
             
             <div class="message">
-                <p>May the blessings of Allah fill your life with happiness, prosperity, and peace.</p>
-                <p>Wishing you and your family a joyous celebration on this blessed day.</p>
-                <p>May this Eid bring new beginnings, fresh perspectives, and renewed faith.</p>
+                <p>May the blessings of Allah fill your life with happiness, prosperity, and peace on this blessed occasion of sacrifice.</p>
+                <p>As we commemorate the devotion of Prophet Ibrahim (AS), may our sacrifices and prayers be accepted.</p>
+                <p>Wishing you and your family a joyous Eid-ul-Adha filled with love and blessings.</p>
             </div>
             
             <div class="button-container">
@@ -48,7 +976,7 @@
             
             <!-- Countdown Timer -->
             <div class="countdown-container">
-                <h3>Eid Celebration Countdown</h3>
+                <h3>Eid-ul-Adha Countdown</h3>
                 <div class="countdown">
                     <div class="time-section">
                         <div id="days" class="time-value">00</div>
@@ -68,175 +996,3 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Decorative Elements -->
-        <div class="floating-lanterns">
-            <div class="lantern lantern1"></div>
-            <div class="lantern lantern2"></div>
-            <div class="lantern lantern3"></div>
-            <div class="lantern lantern4"></div>
-            <div class="lantern lantern5"></div>
-            <div class="lantern lantern6"></div>
-            <div class="lantern lantern7"></div>
-            <div class="lantern lantern8"></div>
-            <div class="lantern lantern9"></div>
-        </div>
-        
-        <div class="decorative-elements">
-            <div class="fanoos fanoos1"></div>
-            <div class="fanoos fanoos2"></div>
-            <div class="fanoos fanoos3"></div>
-            <div class="fanoos fanoos4"></div>
-            <div class="fanoos fanoos5"></div>
-        </div>
-        
-        <!-- Prayer Times -->
-        <div class="prayer-times">
-            <div class="prayer-times-toggle">
-                <i class="fas fa-pray"></i>
-            </div>
-            <div class="prayer-times-content">
-                <h3>Prayer Times</h3>
-                <ul>
-                    <li><span>Fajr:</span> 4:30 AM</li>
-                    <li><span>Dhuhr:</span> 1:00 PM</li>
-                    <li><span>Asr:</span> 3:45 PM</li>
-                    <li><span>Maghrib:</span> 7:05 PM</li>
-                    <li><span>Isha:</span> 8:35 PM</li>
-                </ul>
-            </div>
-        </div>
-        
-        <!-- Qibla Direction -->
-        <div class="qibla-indicator">
-            <div class="qibla-toggle">
-                <i class="fas fa-compass"></i>
-            </div>
-            <div class="qibla-content">
-                <h3>Qibla Direction</h3>
-                <div class="compass">
-                    <div class="compass-needle"></div>
-                </div>
-                <p>Rotate your device to find Qibla</p>
-            </div>
-        </div>
-        
-        <!-- Floating Particles -->
-        <div class="particles"></div>
-        
-        <!-- Main Popup -->
-        <div id="wishPopup" class="wish-popup">
-            <div class="popup-content">
-                <div class="islamic-pattern top-pattern"></div>
-                <span class="close-button">&times;</span>
-                <h2>Special Eid Wishes</h2>
-                <div class="popup-divider">
-                    <i class="fas fa-star-and-crescent"></i>
-                </div>
-                <p>May this Eid bring you moments of joy with loved ones, abundance on your table, and contentment in your heart.</p>
-                <p>May the divine blessings of Allah bring you hope, faith, and joy on Eid al-Fitr and forever. May Allah bless your good deeds and forgive your transgressions.</p>
-                <p class="arabic-wish">تقبل الله منا ومنكم</p>
-                <p><em>Taqabbal Allahu minna wa minkum</em></p>
-                <p class="translation">(May Allah accept from us and from you)</p>
-                
-                <!-- Interactive Wish Selector -->
-                <div class="wish-selector">
-                    <h3>Send a personalized wish</h3>
-                    <div class="wish-options">
-                        <button class="wish-option" data-wish="health">Health & Wellness</button>
-                        <button class="wish-option" data-wish="prosperity">Prosperity</button>
-                        <button class="wish-option" data-wish="peace">Peace & Harmony</button>
-                        <button class="wish-option" data-wish="happiness">Happiness</button>
-                    </div>
-                    <div class="selected-wish-container">
-                        <p id="selectedWish">Select a wish to see a special message</p>
-                    </div>
-                </div>
-                
-                <div class="share-section">
-                    <h3>Share this greeting</h3>
-                    <div class="share-buttons">
-                        <button class="share-button facebook"><i class="fab fa-facebook-f"></i></button>
-                        <button class="share-button twitter"><i class="fab fa-twitter"></i></button>
-                        <button class="share-button whatsapp"><i class="fab fa-whatsapp"></i></button>
-                        <button class="share-button email"><i class="fas fa-envelope"></i></button>
-                    </div>
-                </div>
-                <div class="islamic-pattern bottom-pattern"></div>
-            </div>
-        </div>
-        
-        <!-- Calendar Popup -->
-        <div id="calendarPopup" class="wish-popup">
-            <div class="popup-content calendar-content">
-                <div class="islamic-pattern top-pattern"></div>
-                <span class="close-button calendar-close">&times;</span>
-                <h2>Islamic Calendar</h2>
-                <div class="popup-divider">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-                
-                <div class="calendar-container">
-                    <div class="calendar-controls">
-                        <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
-                        <h3 id="currentMonth">Shawwal 1446</h3>
-                        <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div class="weekdays">
-                        <div>Sun</div>
-                        <div>Mon</div>
-                        <div>Tue</div>
-                        <div>Wed</div>
-                        <div>Thu</div>
-                        <div>Fri</div>
-                        <div>Sat</div>
-                    </div>
-                    <div class="days" id="calendarDays">
-                        <!-- Days will be filled with JavaScript -->
-                    </div>
-                </div>
-                
-                <div class="islamic-events">
-                    <h3>Upcoming Islamic Events</h3>
-                    <ul>
-                        <li><span class="event-date">1 Shawwal:</span> Eid al-Fitr</li>
-                        <li><span class="event-date">10 Dhul-Hijjah:</span> Eid al-Adha</li>
-                        <li><span class="event-date">1 Muharram:</span> Islamic New Year</li>
-                        <li><span class="event-date">12 Rabi al-Awwal:</span> Mawlid al-Nabi</li>
-                    </ul>
-                </div>
-                
-                <div class="islamic-pattern bottom-pattern"></div>
-            </div>
-        </div>
-        
-        <!-- Sound Control -->
-        <div class="sound-control">
-            <button id="soundToggle" class="sound-button">
-                <i class="fas fa-volume-up"></i>
-            </button>
-        </div>
-        
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <p>Sent with love and warm wishes for a blessed Eid celebration</p>
-                <p class="signature">~ mdz_yawar ~</p>
-                <div class="footer-social">
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-    <!-- Audio Element -->
-    <audio id="eidMusic" loop preload="auto">
-        <source src="https://podcasts.qurancentral.com/aaar-al-hudhoudi/067.mp3?download=067+al-mulk" type="audio/mp3">
-    </audio>
-    
-    <script src="script.js"></script>
-</body>
-</html>
